@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="customers" type="customersType"/>
+
+    <xsd:complexType name="customersType">
+        <xsd:sequence>
+            <xsd:element type="customerType" name="customer" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="customerType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:unsignedLong"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element type="ordersType" name="orders"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ordersType">
+        <xsd:sequence>
+            <xsd:element type="orderType" name="order" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="orderType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:unsignedLong"/>
+            <xsd:element type="positionsType" name="positions"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="positionsType">
+        <xsd:sequence>
+            <xsd:element type="positionType" name="position" maxOccurs="unbounded" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="positionType">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:unsignedLong"/>
+            <xsd:element name="price" type="nonNegativeDecimal"/>
+            <xsd:element name="count" type="xsd:nonNegativeInteger"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name='nonNegativeDecimal'>
+        <xsd:restriction base='xsd:decimal'>
+            <xsd:minInclusive value='0'/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
