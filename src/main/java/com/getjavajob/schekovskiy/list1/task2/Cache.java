@@ -1,8 +1,5 @@
 package com.getjavajob.schekovskiy.list1.task2;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -50,9 +47,6 @@ public class Cache<K, V> {
         }
     }
 
-    public Cache() {
-    }
-
     public Cache(long millisUntilExpiration) {
         this.millisUntilExpiration = millisUntilExpiration;
     }
@@ -88,9 +82,6 @@ public class Cache<K, V> {
         return value;
     }
 
-    public boolean containsKey(K key) {
-        return entryCacheMap.containsKey(key);
-    }
 
     public int size() {
         return entryCacheMap.size();
@@ -100,22 +91,20 @@ public class Cache<K, V> {
         entryCacheMap.clear();
     }
 
+    public Map<K, EntryCache> getMap() {
+        return entryCacheMap;
+    }
+
     public void cleanUp() {
         for (Iterator<K> iterator = entryCacheMap.keySet().iterator(); iterator.hasNext(); ) {
             K key = iterator.next();
             EntryCache e = entryCacheMap.get(key);
             long now = System.currentTimeMillis();
             long liveTime = e.getTimestamp() + millisUntilExpiration;
-            if (liveTime < now) {
+            if (liveTime <= now) {
                 iterator.remove();
                 break;
             }
         }
-    }
-
-    private static String getCurrentTime() {
-        Date date = new Date();
-        DateFormat format = new SimpleDateFormat("HH:mm:ss");
-        return format.format(date);
     }
 }

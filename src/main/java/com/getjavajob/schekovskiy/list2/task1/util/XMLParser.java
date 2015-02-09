@@ -18,8 +18,8 @@ import java.util.List;
 
 public class XMLParser {
 
-    public SAXHandler parseXML(String xml, InputStream xsdPath) throws ParserConfigurationException, SAXException, IOException {
-        if (XMLValidator.validateXMLSchema(xml, xsdPath)) {
+    public SAXHandler parseXML(String xml, InputStream xsd) throws ParserConfigurationException, SAXException, IOException {
+        if (XMLValidator.validateXMLSchema(xml, xsd)) {
             SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
             SAXParser parser = saxParserFactory.newSAXParser();
             SAXHandler handler = new SAXHandler();

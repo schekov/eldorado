@@ -25,7 +25,7 @@ public class SimplePageParser {
 
     public SimplePageParser(String dir) throws MalformedURLException, UnsupportedEncodingException {
         this.dir = dir;
-        threadPoolExecutor = new ThreadPoolExecutor(5, 10, 5000, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>()
+        threadPoolExecutor = new ThreadPoolExecutor(3, 6, 5000, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>()
         );
     }
 
@@ -57,7 +57,6 @@ public class SimplePageParser {
 
         BlockingQueue<Runnable> runnables = new ArrayBlockingQueue<>(100);
 
-        int size = 0;
         for (final Element link : links) {
             String attributeKey = "";
             if (isCss) attributeKey = "href";
